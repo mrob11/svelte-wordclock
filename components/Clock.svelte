@@ -1,8 +1,8 @@
 <script>
   export let time = new Date()
+
   $: hours = time.getHours()
   $: minutes = time.getMinutes()
-  $: seconds = time.getSeconds()
 
   $: mfive = (minutes >= 5 && minutes < 10) || (minutes >= 55 && minutes <= 59)
   $: mten = (minutes >= 10 && minutes < 15) || (minutes >= 50 && minutes < 55)
@@ -10,26 +10,33 @@
     (minutes >= 15 && minutes < 20) || (minutes >= 45 && minutes < 50)
   $: twenty =
     (minutes >= 20 && minutes < 30) || (minutes >= 40 && minutes <= 45)
-  $: half = minutes >= 30 && minutes < 45
+  $: half = minutes >= 30 && minutes < 40
 
   $: to = minutes >= 40
   $: past = minutes >= 5 && minutes < 40
   $: oclock = minutes < 5
 
-  $: one = hours === 1 || hours === 13
-  $: two = hours === 2 || hours === 14
-  $: three = hours === 3 || hours === 15
-  $: four = hours === 4 || hours === 16
-  $: five = hours === 5 || hours === 17
-  $: six = hours === 6 || hours === 18
-  $: seven = hours === 7 || hours === 19
-  $: eight = hours === 8 || hours === 20
-  $: nine = hours === 9 || hours === 21
-  $: ten = hours === 10 || hours === 22
-  $: eleven = hours === 11 || hours === 23
-  $: twelve = hours === 12 || hours === 0
+  $: one = hourStatus(time, 1)
+  $: two = hourStatus(time, 2)
+  $: three = hourStatus(time, 3)
+  $: four = hourStatus(time, 4)
+  $: five = hourStatus(time, 5)
+  $: six = hourStatus(time, 6)
+  $: seven = hourStatus(time, 7)
+  $: eight = hourStatus(time, 8)
+  $: nine = hourStatus(time, 9)
+  $: ten = hourStatus(time, 10)
+  $: eleven = hourStatus(time, 11)
+  $: twelve = hourStatus(time, 12)
 
   const pad = (val) => (val >= 10 ? val : "0" + val)
+  const hourStatus = (time, hour) => {
+    let currentHour = time.getHours() % 12
+    return (
+      (currentHour === hour && time.getMinutes() < 40) ||
+      (currentHour === hour + 1 && time.getMinutes() >= 40)
+    )
+  }
 </script>
 
 <div class="clock">
@@ -59,8 +66,10 @@
 
 <style>
   @import url("https://fonts.googleapis.com/css2?family=Major+Mono+Display&display=swap");
+  /* @import url("https://fonts.googleapis.com/css2?family=Sacramento&display=swap"); */
   .clock {
     font-family: "Major Mono Display", monospace;
+    /* font-family: "Sacramento", cursive; */
     font-size: 1.5rem;
     font-style: normal;
     font-weight: 400;
@@ -83,6 +92,12 @@
   @media (min-width: 64rem) {
     .clock {
       font-size: 2.625rem;
+    }
+  }
+
+  @media (min-width: 120rem) {
+    .clock {
+      font-size: 4rem;
     }
   }
   .clock span {
