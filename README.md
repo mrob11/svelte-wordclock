@@ -1,6 +1,6 @@
-# New Project
+# Svelte Word Clock
 
-> ✨ Bootstrapped with Create Snowpack App (CSA).
+I built a fun word clock to learn Svelte.
 
 ## Available Scripts
 
