@@ -8,8 +8,7 @@
   $: mten = (minutes >= 10 && minutes < 15) || (minutes >= 50 && minutes < 55)
   $: quarter =
     (minutes >= 15 && minutes < 20) || (minutes >= 45 && minutes < 50)
-  $: twenty =
-    (minutes >= 20 && minutes < 30) || (minutes >= 40 && minutes <= 45)
+  $: twenty = (minutes >= 20 && minutes < 30) || (minutes >= 40 && minutes < 45)
   $: half = minutes >= 30 && minutes < 40
 
   $: to = minutes >= 40
