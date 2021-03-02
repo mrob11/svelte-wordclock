@@ -1,2 +1,14 @@
-/* Add JavaScript code here! */
-console.log('Hello World! You did! Welcome to Snowpack :D');
+import App from "./App.svelte"
+
+let app = new App({
+  target: document.body,
+})
+
+export default app
+
+if (import.meta.hot) {
+  import.meta.hot.accept()
+  import.meta.hot.dispose(() => {
+    app.$destroy()
+  })
+}
